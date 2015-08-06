@@ -19,14 +19,14 @@ if [ "$(uname)" = "SunOS" -a -e "/etc/release" ]; then
 	PATH=/usr/sbin:/usr/bin:/usr/ccs/bin:/usr/sfw/bin:/opt/csw/bin
 fi
 
-GIT=$(which git)
+GIT=git
 OS=$(uname -s)
 ARCH=$(uname -p)
-DISTRIB="unknown"
-LSB_RELEASE="$(which lsb_release 2>/dev/null)"
-GMAKE=$(which gmake)
-MKDIR=$(which mkdir)
-PERL=$(which perl)
+DISTRIB="CentOS"
+#LSB_RELEASE="$(which lsb_release 2>/dev/null)"
+GMAKE=gmake
+MKDIR=mkdir
+PERL=perl
 
 RUN_TESTS=no
 
@@ -41,11 +41,6 @@ function make_check() {
 	fi
 }
 
-# Try to get the OS distributor such as "Fedora"
-if [ "${OS}" = "Linux" -a -n "${LSB_RELEASE}" ]; then
-	DISTRIB="$(${LSB_RELEASE} -i -s)"
-fi
-DISTRIB=CentOS
 
 # Check for the location of the git binary.
 if [ -z "${GIT}" ]; then
